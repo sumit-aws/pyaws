@@ -11,20 +11,20 @@ def initialize():
 
 def copy_file():
     copy_source = {
-        'Bucket': 'sumit-aws-raw',
-        'Key': 'load_sample_001.yml'
+        'Bucket': read_config('raw_bucket'),
+        'Key': 'orders_load_sample_001.csv'
     }
 
-    target_bucket = initialize().Bucket(read_config())
-    target_bucket.copy(copy_source,'load_sample_001_copied.yml')
+    target_bucket = initialize().Bucket(read_config('qualified_bucket'))
+    target_bucket.copy(copy_source,'orders_load_sample_001_copied.csv')
 
 
-def read_config():
+def read_config(bucket):
     config = configparser.RawConfigParser()
     config.read('conf/config.properties')
-    qualified_bucket = config.get('dev', 'qualified_bucket')
-    print(qualified_bucket)
-    return qualified_bucket
+    bucket = config.get('dev', bucket)
+    print(bucket)
+    return bucket
 
 
 if __name__ == "__main__":
