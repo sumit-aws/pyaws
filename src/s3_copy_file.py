@@ -1,12 +1,12 @@
 import boto3
 import os
-import configparser
+from util.helper_functions import read_config
 
 
-def initialize():
+def initialize(service):
     # s3_client = boto3.client(service_name='s3')
-    s3_client = boto3.resource('s3')
-    return s3_client
+    client = boto3.resource('s3')
+    return client
 
 
 def copy_file():
@@ -15,16 +15,8 @@ def copy_file():
         'Key': 'orders_load_sample_001.csv'
     }
 
-    target_bucket = initialize().Bucket(read_config('qualified_bucket'))
+    target_bucket = initialize('s3').Bucket(read_config('qualified_bucket'))
     target_bucket.copy(copy_source,'orders_load_sample_001_copied.csv')
-
-
-def read_config(bucket):
-    config = configparser.RawConfigParser()
-    config.read('conf/config.properties')
-    bucket = config.get('dev', bucket)
-    print(bucket)
-    return bucket
 
 
 if __name__ == "__main__":
