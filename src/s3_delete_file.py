@@ -9,7 +9,7 @@ def initialize():
 
 
 def delete_file():
-    target_bucket = read_config()
+    target_bucket = read_config('qualified_bucket')
     all_objects = initialize().list_objects(Bucket=target_bucket)
     print(f"list of all objects to be deleted from {target_bucket}: ")
     for files in all_objects['Contents']:
@@ -21,12 +21,12 @@ def delete_file():
             )
 
 
-def read_config():
+def read_config(bucket):
     config = configparser.RawConfigParser()
     config.read('conf/config.properties')
-    qualified_bucket = config.get('dev', 'qualified_bucket')
-    print(qualified_bucket)
-    return qualified_bucket
+    bucket = config.get('dev', bucket)
+    print(bucket)
+    return bucket
 
 
 if __name__ == "__main__":

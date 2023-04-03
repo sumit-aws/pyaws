@@ -12,15 +12,15 @@ def initialize():
 
 def upload_file():
     filename = "data\sample_s3.yml"
-    initialize().upload_file(filename, read_config(), "load_sample_001.yml")
+    initialize().upload_file(filename, read_config('raw_bucket'), "load_sample_001.yml")
 
 
-def read_config():
+def read_config(bucket):
     config = configparser.RawConfigParser()
     config.read('conf/config.properties')
-    raw_bucket = config.get('dev', 'raw_bucket')
-    print(raw_bucket)
-    return raw_bucket
+    bucket = config.get('dev', bucket)
+    print(bucket)
+    return bucket
 
 
 if __name__ == "__main__":
