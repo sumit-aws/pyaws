@@ -4,6 +4,7 @@ from util.helper_functions import initialize,read_config
 
 
 def delete_file():
+    # code is for deleting the file
     target_bucket = read_config('qualified_bucket')
     all_objects = initialize('s3').list_objects(Bucket=target_bucket)
     print(f"list of all objects to be deleted from {target_bucket}: ")
