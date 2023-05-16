@@ -1,0 +1,1 @@
+pip3 install boto3==1.26.134
