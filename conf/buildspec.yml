@@ -1,22 +1,16 @@
 version: 0.2
 phases:
-  install:
+  build:
     runtime-versions:
       python: 3.12
     commands:
-      - echo "used lambda layer for dependencies..."
-      # - pip install -r requirements.txt -t lib
-  build:
-    commands:
-      - echo "Zipping deployment package..."
+      - echo "Copying code to S3 bucket..."
+      - cp s3_lambda_sns_topic_1.py lib/
       - cd lib
       - zip -r9 ../deployment_package.zip .
       - cd ..
-      - zip -g deployment_package.zip s3_lambda_sns_topic_1.py
-  post_build:
-    commands:
-      - echo "Uploading to S3..."
+      - echo "Uploading deployment package to S3 bucket..."
       - aws s3 cp deployment_package.zip s3://aws-sumit-gds/s3-lambda-sns/
-      - echo "Updating Lambda function via S3..."
+      - echo "Updating Lambda function code via S3..."
       - aws lambda update-function-code --function-name s3-lambda-sns-demo --s3-bucket aws-sumit-gds --s3-key deployment_package.zip
       - echo "Deployment complete!"
