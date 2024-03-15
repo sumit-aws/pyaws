@@ -1,8 +1,11 @@
 version: 0.2
 phases:
-  build:
+  install:
     runtime-versions:
       python: 3.12
+    commands:
+      - echo "Used lambda layers for dependencies..."
+  build:
     commands:
       - echo "Copying code to S3 bucket..."
       - cp s3_lambda_sns_topic_1.py lib/
