@@ -14,6 +14,7 @@ phases:
       - cd ..
       - echo "Uploading deployment package to S3 bucket..."
       - aws s3 cp deployment_package.zip s3://aws-sumit-gds/s3-lambda-sns/
+      - echo "Uploaded deployment package to S3 bucket..."
       - echo "Updating Lambda function code via S3..."
       - aws lambda update-function-code --function-name s3-lambda-sns-demo --s3-bucket aws-sumit-gds --s3-key deployment_package.zip
       - echo "Deployment complete!"
