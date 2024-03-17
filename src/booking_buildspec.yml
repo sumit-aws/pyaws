@@ -12,11 +12,11 @@ phases:
       - cd lib
       - zip -r9 ../deployment_package.zip .
       - cd ..
-      - zip -g deployment_package.zip lambda_function.py
+      - zip -g deployment_package.zip src/lambda_function.py
   post_build:
     commands:
       - echo "Uploading to S3..."
-      - aws s3 cp deployment_package.zip s3://lambda-builds-zip/airbnb-booking-records/
+      - aws s3 cp deployment_package.zip s3://aws-sumit-gds/airbnb-booking-records/
       - echo "Updating Lambda function via S3..."
       - aws lambda update-function-code --function-name produce-airbnb-booking-data --s3-bucket aws-sumit-gds --s3-key airbnb-booking-records/deployment_package.zip
       - echo "Deployment complete!"
