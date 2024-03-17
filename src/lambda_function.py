@@ -30,7 +30,7 @@ def produceairbnbbookingdata():
 
     return data
 
-def lambda_handler(): #event, context
+def lambda_handler(event, context):
     i=0
     while(i<2):
         booking_data = produceairbnbbookingdata()
@@ -45,6 +45,3 @@ def lambda_handler(): #event, context
         'statusCode': 200,
         'body': json.dumps('Sales order data published to SQS!')
     }
-
-
-lambda_handler()
