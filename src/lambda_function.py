@@ -10,7 +10,7 @@ QUEUE_URL = 'https://sqs.ap-south-1.amazonaws.com/471112572097/airbnb-booking-qu
 def produceairbnbbookingdata():
     city = ['pune', 'mumbai', 'hyderabad', 'delhi', 'chennai']
     days = [1,2,1,3,1,4,1,5,6,1]
-    bookingID = str(uuid.uuid4())
+    bookingID = "B"+str(random.randint(10000, 99999))
     userID = "U"+str(random.randint(10000, 99999))
     propertyID = "P"+str(random.randint(1000, 9999))
     location = random.choice(city)
